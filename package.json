@@ -1,0 +1,16 @@
+{
+  "name": "diyarserver",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./app/server"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.5",
+    "morgan": "~1.9.0"
+  }
+}
