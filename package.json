@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./app/server"
+    "start": "node ./app/server",
+    "dev": "nodemon ./app/server"
+  },
+  "endinges" : {
+    "node": "11.6.0"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
