@@ -6,15 +6,17 @@
     "start": "node ./app/server",
     "dev": "nodemon ./app/server"
   },
-  "endinges" : {
+  "endinges": {
     "node": "11.6.0"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.5",
-    "morgan": "~1.9.0"
+    "morgan": "~1.9.0",
+    "validator": "^10.11.0"
   }
 }

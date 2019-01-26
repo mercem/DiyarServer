@@ -1,18 +1,15 @@
 const { Category} = require('./model');
+const _ = require('lodash');
 
-
-module.exports.create = async (req, res, next) => {
-  let category = new Category({
-    name: req.body.name,
-    image: req.body.image
-  });
-  res.send(
-    await category.save().then(doc => doc, error => error)
-  );
+module.exports.create = (req, res, next) => {
+  let category = new Category(_.pick(req.body, ['name', 'image']));
+  category.save().then(doc => doc).catch((e) => {
+    res.status(400).send(e);
+  })
 }
 
-module.exports.get = async (req, res, next) => {
-  res.send(
-    await Category.find().then(docs => docs, error => error)
-  )
+module.exports.get = (req, res, next) => {
+  Category.find().then(docs => docs).catch((e) => {
+    res.status(400).send(e);
+  })
 }
