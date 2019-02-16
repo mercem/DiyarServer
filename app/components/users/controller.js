@@ -2,12 +2,15 @@ const {User} = require('./model');
 const _ = require('lodash');
 
 module.exports.create = (req, res) => {
-  const user = new User(_.pick(req.body, ['email', 'name']));
-  user.save().then(() => user.generateAuthToken()).then(token => {
-    res.send({user, token});
-  }).catch((e) => {
-    res.status(400).send(e);
-  })
+  const user = new User(_.pick(req.body, ['email', 'name', 'password']));
+  user.save()
+    .then(() => user.generateAuthToken())
+    .then(token => {
+      res.send({user, token});
+    })
+    .catch((e) => {
+      res.status(400).send(e);
+    })
 }
 
 module.exports.find = (req, res) => {
@@ -26,7 +29,7 @@ module.exports.findById = (req, res) => {
   .catch((e) => {
     res.status(400).send(e);
   })
-}
+};
 
 
 // Catch blockları
