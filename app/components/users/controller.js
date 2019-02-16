@@ -1,7 +1,7 @@
 const {User} = require('./model');
 const _ = require('lodash');
 
-module.exports.create = (req, res, next) => {
+module.exports.create = (req, res) => {
   const user = new User(_.pick(req.body, ['email', 'name']));
   user.save().then(() => user.generateAuthToken()).then(token => {
     res.send({user, token});
@@ -10,14 +10,20 @@ module.exports.create = (req, res, next) => {
   })
 }
 
-module.exports.find = (req, res, next) => {
-  User.find(req.body).then(docs => res.send(docs)).catch((e) => {
+module.exports.find = (req, res) => {
+  User.find(req.body).then(docs => res.send(docs))
+  .catch((e) => {
     res.status(400).send(e);
   })
 }
 
-module.exports.findById = (req, res, next) => {
-  User.findById(req.params.id).then(docs => res.send(docs)).catch((e) => {
+module.exports.me = (req, res) => {
+  res.send(req.user);
+};
+
+module.exports.findById = (req, res) => {
+  User.findById(req.params.id).then(docs => res.send(docs))
+  .catch((e) => {
     res.status(400).send(e);
   })
 }

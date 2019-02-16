@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
-app.listen(port, () => {console.log('Server is up at port 3000');});
+app.listen(port, () => {console.log(`Server is up at port ${port}`);});
 
 module.exports = app;
+

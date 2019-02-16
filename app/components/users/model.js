@@ -3,9 +3,6 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
-// const crypto = require('crypto');
-// const hash = (message) => crypto.createHash('sha256').update(message).digest('hex');
-
 const schema = new mongoose.Schema({
     email: {
         type: String,
@@ -58,6 +55,21 @@ schema.methods.toJSON = function () {
     let user = this;
     let userObject = user.toObject();
     return _.pick(userObject, ['_id', 'email', 'name']);
+}
+
+schema.statics.findByToken = function(token) {
+    const User = this;
+    let decoded;
+    try {
+        decoded = jwt.verify(token, 'privateKeyHere');
+    } catch(e) {
+        return Promise.reject()
+    }
+    return User.findOne({
+        '_id': decoded._id,
+        'tokens.token': token,
+        'tokens.access': 'auth'
+    })
 }
 
 const User = mongoose.model('User', schema);
