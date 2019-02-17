@@ -14,7 +14,7 @@ module.exports.create = (req, res) => {
 }
 
 module.exports.find = (req, res) => {
-  User.find(req.body).then(docs => res.send(docs))
+  User.find(req.query).then(docs => res.send(docs))
   .catch((e) => {
     res.status(400).send(e);
   })

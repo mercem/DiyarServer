@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const controller = require('./controller');
+const {authendicate} = require('../../middleware/auth');
 
-router.get('/', (req, res, next) => {
-  res.send('This is model response.');
-});
+router.post('/', authendicate, controller.create);
+router.get('/me', authendicate, controller.me);
 
 module.exports = router;

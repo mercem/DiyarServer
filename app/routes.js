@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const app = express();
-const users = require('../components/users/routes');
-const models = require('../components/models/routes');
-const categories = require('../components/categories/routes');
+const users = require('./components/users/routes');
+const models = require('./components/models/routes');
+const categories = require('./components/categories/routes');
 
 /* GET home page. */
 app.get('/', function(req, res, next) {

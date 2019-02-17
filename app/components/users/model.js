@@ -4,10 +4,11 @@ const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const crypto = require('crypto');	
 
-const secretKey = 'aSecretKey'
+const JWT_KEY = process.env.JWT_KEY;
+const HMAC_KEY = process.env.HMAC_KEY;
 
 const getHmac = (message) => {
-  const hmac = crypto.createHmac('sha256', secretKey);
+  const hmac = crypto.createHmac('sha256', HMAC_KEY);
   return hmac.update(message).digest('hex')
 }
 
@@ -25,13 +26,13 @@ const schema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true,
+    required: [true, 'password is required.'],
     minlength: 1,
     trim: true
   },
   password: {
     type: String,
-    require: true,
+    required: [true, 'password is required.'],
     minlength: 6
   },
   tokens: [{
@@ -48,12 +49,12 @@ const schema = new mongoose.Schema({
     type: Number,
     default: 2, // regular user
   }
-});
+}); 
 
 schema.methods.generateAuthToken = function () {
   let user = this;
   const access = 'auth';
-  const token = jwt.sign({_id: user._id.toHexString(), access}, secretKey).toString(); 
+  const token = jwt.sign({_id: user._id.toHexString(), access}, JWT_KEY).toString(); 
   user.tokens = user.tokens.concat([{access, token}]);
   return user.save().then(() => token)
 }
@@ -68,9 +69,9 @@ schema.statics.findByToken = function(token) {
   const User = this;
   let decoded;
   try {
-    decoded = jwt.verify(token, secretKey);
+		decoded = jwt.verify(token, JWT_KEY);
   } catch(e) {
-    return Promise.reject()
+    return Promise.reject('Invalid Token');
   }
   return User.findOne({
     '_id': decoded._id,
@@ -81,7 +82,6 @@ schema.statics.findByToken = function(token) {
 
 schema.pre('save', function(next){
   const user = this;
-  console.log(user);
   if(user.isModified('password')){
     user.password = getHmac(user.password);
   }

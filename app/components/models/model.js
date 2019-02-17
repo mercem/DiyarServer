@@ -1,28 +1,32 @@
 const {mongoose} = require('../../../db');
 
-const Model = mongoose.model('Model', {
-    name: {
-        type: String,
-        required: true
-    },
-    //TODO bind to category
-    category: {
-        type: String,
-        required: true
-    },
-    city: {
-        type: String,
-    },
-    hqPrefabLink: {
-        type: String,
-    },
-    lqPrefabLink: {
-        type: String,
-    },
-    spriteUrl:{
-        type: String,
-        default: ''
-    }
+const schema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  category: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+  },
+  hqPrefabLink: {
+    type: String,
+  },
+  lqPrefabLink: {
+    type: String,
+  },
+  spriteUrl:{
+    type: String,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  }
 })
+
+const Model = mongoose.model('Model', schema)
 
 module.exports = {Model}
