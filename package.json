@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./app/server",
-    "dev": "nodemon ./app/server"
+    "start": "node ./server",
+    "dev": "nodemon ./server"
   },
   "endinges": {
     "node": "11.6.0"

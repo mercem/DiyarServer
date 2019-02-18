@@ -1,13 +1,12 @@
 const express = require('express');
-const router = express.Router();
 const app = express();
 const users = require('./components/users/routes');
 const models = require('./components/models/routes');
 const categories = require('./components/categories/routes');
 
 /* GET home page. */
-app.get('/', function(req, res, next) {
-  res.send('Diyar API');
+app.get('/', function(req, res,) {
+  res.send('Diyar API v0');
 });
 
 app.use('/users', users);
