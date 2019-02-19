@@ -2,15 +2,9 @@ const {mongoose} = require('../../../db');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
-const crypto = require('crypto');	
-
+const {getHmac, verifyPassword} = require('./helper');
 const JWT_KEY = process.env.JWT_KEY;
 const HMAC_KEY = process.env.HMAC_KEY;
-
-const getHmac = (message) => {
-  const hmac = crypto.createHmac('sha256', HMAC_KEY);
-  return hmac.update(message).digest('hex')
-}
 
 const schema = new mongoose.Schema({
   email: {
@@ -56,7 +50,7 @@ schema.methods.generateAuthToken = function () {
   const access = 'auth';
   const token = jwt.sign({_id: user._id.toHexString(), access}, JWT_KEY).toString(); 
   user.tokens = user.tokens.concat([{access, token}]);
-  return user.save().then(() => token)
+  return user.save().then(() => token);
 }
 
 schema.methods.toJSON = function () {
@@ -87,6 +81,20 @@ schema.pre('save', function(next){
   }
   next();
 });
+
+schema.statics.findByCredentials = function (creds) {
+ const User = this
+ return User.findOne({email: creds.email}).then(async function(user){
+   if(!user) return Promise.reject('User not found.');
+   if(verifyPassword(creds.password, user.password)){
+    let token = await user.generateAuthToken();
+    console.log(token + '2')
+    console.log('2')
+    return Promise.resolve({user, token})
+   };
+   return Promise.reject('Incorrect password.')
+ }).catch(err => Promise.reject(err));
+};
 
 const User = mongoose.model('User', schema);
 const Roles = {

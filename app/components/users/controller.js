@@ -8,17 +8,24 @@ module.exports.create = (req, res) => {
     .then(token => {
       res.send({user, token});
     })
-    .catch((e) => {
-      res.status(400).send(e);
+    .catch((err) => {
+      res.status(400).send(err);
     })
+};
+
+module.exports.login = (req, res) => {
+  const creds = _.pick(req.body, ['email', 'password']);
+  User.findByCredentials(creds)
+    .then(userAndToken => res.send(userAndToken))
+    .catch(err => res.status(404).send(err))
 }
 
 module.exports.find = (req, res) => {
   User.find(req.query).then(docs => res.send(docs))
-  .catch((e) => {
-    res.status(400).send(e);
-  })
-}
+    .catch((err) => {
+      res.status(400).send(err);
+    })
+};
 
 module.exports.me = (req, res) => {
   res.send(req.user);
@@ -26,8 +33,8 @@ module.exports.me = (req, res) => {
 
 module.exports.findById = (req, res) => {
   User.findById(req.params.id).then(docs => res.send(docs))
-  .catch((e) => {
-    res.status(400).send(e);
+  .catch((err) => {
+    res.status(400).send(err);
   })
 };
 

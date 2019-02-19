@@ -9,12 +9,18 @@ module.exports.create = (req, res) => {
   });
   model.save()
   .then(model => res.send(model))
-  .catch(e => res.status(400).send(e))
+  .catch(err => res.status(400).send(err))
 };
+
+module.exports.all = (req, res) => {
+  Model.find()
+  .then(models => res.send(models))
+  .catch(err => res.status(404).send(err))
+}
 
 module.exports.me = (req, res) => {
   const user = req.user;
   Model.find({userId: user._id})
   .then(models => res.send(models))
-  .catch(e => res.status(400).send(e))
+  .catch(err => res.status(400).send(err))
 };
