@@ -88,8 +88,6 @@ schema.statics.findByCredentials = function (creds) {
    if(!user) return Promise.reject('User not found.');
    if(verifyPassword(creds.password, user.password)){
     let token = await user.generateAuthToken();
-    console.log(token + '2')
-    console.log('2')
     return Promise.resolve({user, token})
    };
    return Promise.reject('Incorrect password.')

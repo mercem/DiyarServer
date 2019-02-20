@@ -12,10 +12,7 @@ const schema = new mongoose.Schema({
   city: {
     type: String,
   },
-  hqPrefabLink: {
-    type: String,
-  },
-  lqPrefabLink: {
+  prefabLink: {
     type: String,
   },
   spriteUrl:{
