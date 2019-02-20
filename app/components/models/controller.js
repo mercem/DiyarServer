@@ -5,7 +5,8 @@ module.exports.create = (req, res) => {
   const model = new Model({
     userId: req.user._id,
     name: req.body.name,
-    category: req.body.category
+    category: req.body.category,
+    prefabLink: req.body.prefabLink
   });
   model.save()
   .then(model => res.send(model))
