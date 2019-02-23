@@ -13,9 +13,11 @@ const schema = new mongoose.Schema({
     type: String,
   },
   prefabLink: {
-    type: String,
+    required: true,
+    type: String
   },
-  spriteUrl:{
+  imageUrl:{
+    required: true,
     type: String,
   },
   userId: {
