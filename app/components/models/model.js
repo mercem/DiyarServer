@@ -16,7 +16,7 @@ const schema = new mongoose.Schema({
     required: true,
     type: String
   },
-  imageUrl:{
+  imageUrl: {
     required: true,
     type: String,
   },

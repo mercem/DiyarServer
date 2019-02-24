@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: [true, 'password is required.'],
+    required: [true, 'name is required.'],
     minlength: 1,
     trim: true
   },

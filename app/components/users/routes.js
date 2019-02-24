@@ -6,6 +6,7 @@ router.post('/', controller.create);
 router.get('/', controller.find);
 router.post('/login', controller.login);
 router.get('/me', authendicate, controller.me);
+router.post('/me', authendicate, controller.updateMe);
 router.get('/:id',controller.findById);
 
 module.exports = router;
