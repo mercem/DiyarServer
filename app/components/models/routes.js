@@ -4,6 +4,7 @@ const {authendicate} = require('../../middleware/auth');
 
 router.post('/', authendicate, controller.create);
 router.get('/', controller.all);
+router.delete('/:id', authendicate, controller.deleteById);
 router.get('/me', authendicate, controller.me);
 router.post('/update', authendicate, controller.update);
 
