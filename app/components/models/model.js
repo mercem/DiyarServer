@@ -7,14 +7,22 @@ const schema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: true
+    required: true,
+    enum: ['food', 'furniture', 'building']
   },
   city: {
     type: String,
   },
-  prefabLink: {
-    required: true,
-    type: String
+  prefabLinks: {
+    type: Object,
+    ios: {type: String},
+    android: {type: String},
+    validate: {
+      validator: (links) => {
+        return !!(links.ios || links.android);
+      }
+    },
+    required: [true, 'Ios and/or Android Links are required.']
   },
   imageUrl: {
     required: true,

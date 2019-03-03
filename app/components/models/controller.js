@@ -6,7 +6,7 @@ module.exports.create = (req, res) => {
     userId: req.user._id,
     name: req.body.name,
     category: req.body.category,
-    prefabLink: req.body.prefabLink,
+    prefabLinks: req.body.prefabLinks,
     imageUrl: req.body.imageUrl
   });
   model.save()
@@ -37,7 +37,7 @@ module.exports.update = (req, res) => {
   Model.findById(req.body._id).then(model => {
     if(req.body.name) model.name = req.body.name;
     if(req.body.category) model.category = req.body.category;
-    if(req.body.prefabLink) model.prefabLink = req.body.prefabLink;
+    if(req.body.prefabLinks) model.prefabLinks = req.body.prefabLinks;
     if(req.body.imageUrl) model.imageUrl = req.body.imageUrl;
     model.save().then(model => res.send(model)).catch(err => res.status(404).send(err))
   }).catch(err => res.status(404).send(err))
