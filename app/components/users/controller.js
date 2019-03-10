@@ -37,7 +37,7 @@ module.exports.updateMe = (req, res) => {
 };
 
 module.exports.findById = (req, res) => {
-  User.findById(req.params.id).then(docs => res.send(docs))
+  User.findById(req.params.id).then(user => res.send(user))
   .catch((err) => res.status(400).send(err))
 };
 

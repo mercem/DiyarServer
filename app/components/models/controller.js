@@ -20,6 +20,12 @@ module.exports.all = (req, res) => {
   .catch(err => res.status(404).send(err))
 }
 
+module.exports.findById = (req, res) => {
+  Model.findById(req.params.id)
+  .then(model => res.send(model))
+  .catch(err => res.status(400).send(err))
+}
+
 module.exports.deleteById = (req, res) => {
   Model.deleteOne({_id: req.params.id, userId: req.user._id})
   .then(() => res.send('Succesful'))
