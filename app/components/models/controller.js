@@ -7,7 +7,8 @@ module.exports.create = (req, res) => {
     name: req.body.name,
     category: req.body.category,
     prefabLinks: req.body.prefabLinks,
-    imageUrl: req.body.imageUrl
+    imageUrl: req.body.imageUrl,
+    height: req.body.height
   });
   model.save()
   .then(model => res.send(model))
@@ -45,6 +46,7 @@ module.exports.update = (req, res) => {
     if(req.body.category) model.category = req.body.category;
     if(req.body.prefabLinks) model.prefabLinks = req.body.prefabLinks;
     if(req.body.imageUrl) model.imageUrl = req.body.imageUrl;
+    if(req.body.height) model.imageUrl = req.body.height;
     model.save().then(model => res.send(model)).catch(err => res.status(404).send(err))
   }).catch(err => res.status(404).send(err))
 };
