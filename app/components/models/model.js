@@ -13,6 +13,9 @@ const schema = new mongoose.Schema({
   city: {
     type: String,
   },
+  height: {
+    type: Number,
+  },
   prefabLinks: {
     type: Object,
     ios: {type: String},
