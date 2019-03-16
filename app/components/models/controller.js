@@ -44,8 +44,10 @@ module.exports.update = (req, res) => {
   Model.findById(req.body._id).then(model => {
     if(req.body.name) model.name = req.body.name;
     if(req.body.category) model.category = req.body.category;
-    if(req.body.prefabLinks.ios) model.prefabLinks.ios = req.body.prefabLinks.ios;
-    if(req.body.prefabLinks.android) model.prefabLinks.android = req.body.prefabLinks.android;
+    if(req.body.prefabLinks){
+      if(req.body.prefabLinks.ios) model.prefabLinks.ios = req.body.prefabLinks.ios;
+      if(req.body.prefabLinks.android) model.prefabLinks.android = req.body.prefabLinks.android;
+    }
     if(req.body.imageUrl) model.imageUrl = req.body.imageUrl;
     if(req.body.height) model.height = req.body.height;
     model.save().then(model => res.send(model)).catch(err => res.status(404).send(err))
