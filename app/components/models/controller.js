@@ -47,7 +47,7 @@ module.exports.update = (req, res) => {
     if(req.body.prefabLinks.ios) model.prefabLinks.ios = req.body.prefabLinks.ios;
     if(req.body.prefabLinks.android) model.prefabLinks.android = req.body.prefabLinks.android;
     if(req.body.imageUrl) model.imageUrl = req.body.imageUrl;
-    if(req.body.height) model.imageUrl = req.body.height;
+    if(req.body.height) model.height = req.body.height;
     model.save().then(model => res.send(model)).catch(err => res.status(404).send(err))
   }).catch(err => res.status(404).send(err))
 };

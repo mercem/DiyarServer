@@ -15,6 +15,7 @@ const schema = new mongoose.Schema({
   },
   height: {
     type: Number,
+    default: 5
   },
   prefabLinks: {
     type: Object,
