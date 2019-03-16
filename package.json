@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./server",
-    "dev": "nodemon ./server"
+    "dev": "nodemon ./server",
+    "console": "node ./console"
   },
   "endinges": {
     "node": "11.6.0"
