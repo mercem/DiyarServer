@@ -1,3 +1,4 @@
+require('../configs');
 var repl = require('repl');
 
 var {User, Roles} = require('../app/components/users/model');

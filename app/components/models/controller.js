@@ -45,14 +45,9 @@ module.exports.update = (req, res) => {
     if(req.body.name) model.name = req.body.name;
     if(req.body.category) model.category = req.body.category;
     if(req.body.prefabLinks){
-      console.log("prefablinks: " + req.body.prefabLinks);
-      console.log("prefablinks ios: " + req.body.prefabLinks.ios);
-      console.log("prefablinks android: " + req.body.prefabLinks.android);
       if(req.body.prefabLinks.ios) model.prefabLinks.ios = req.body.prefabLinks.ios;
       if(req.body.prefabLinks.android) model.prefabLinks.android = req.body.prefabLinks.android;
     }
-    console.log("model ios: " + model.prefabLinks.ios);
-    console.log("model android: " + model.prefabLinks.android);
     if(req.body.imageUrl) model.imageUrl = req.body.imageUrl;
     if(req.body.height) model.height = req.body.height;
     model.markModified('prefabLinks'); // necessary when updating nested fields! 
