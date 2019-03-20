@@ -16,7 +16,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.all = (req, res) => {
-  Model.find()
+  Model.find(req.query)
   .then(models => res.send(models))
   .catch(err => res.status(404).send(err))
 }
