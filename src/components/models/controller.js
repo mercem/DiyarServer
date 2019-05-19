@@ -28,7 +28,7 @@ module.exports.findById = (req, res) => {
 }
 
 module.exports.deleteById = (req, res) => {
-  Model.deleteOne({_id: req.params.id, userId: req.user._id})
+  Model.remove({_id: req.params.id, userId: req.user._id})
   .then(() => res.send('Succesful'))
   .catch(err => res.send(err));
 }

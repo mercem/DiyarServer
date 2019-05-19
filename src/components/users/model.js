@@ -1,10 +1,9 @@
-const {mongoose} = require('../../../db');
+const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const {getHmac, verifyPassword} = require('./helper');
 const JWT_KEY = process.env.JWT_KEY;
-const HMAC_KEY = process.env.HMAC_KEY;
 
 const schema = new mongoose.Schema({
   email: {
@@ -43,7 +42,11 @@ const schema = new mongoose.Schema({
     type: Number,
     default: 2, // regular user
   }
+}, {
+  timestamps: true
 }); 
+
+// ----- METHODS -----
 
 schema.methods.generateAuthToken = function () {
   let user = this;
@@ -58,6 +61,9 @@ schema.methods.toJSON = function () {
   let userObject = user.toObject();
   return _.pick(userObject, ['_id', 'email', 'name']);
 }
+
+
+// ----- STATICS -----
 
 schema.statics.findByToken = function(token) {
   const User = this;
@@ -74,6 +80,7 @@ schema.statics.findByToken = function(token) {
   })
 }      
 
+// ----- MIDDLEWARES -----
 schema.pre('save', function(next){
   const user = this;
   if(user.isModified('password')){
@@ -81,6 +88,10 @@ schema.pre('save', function(next){
   }
   next();
 });
+
+schema.pre('remove', async function() {
+  await mongoose.model('Model').remove({userId: this._id})
+})
 
 schema.statics.findByCredentials = function (creds) {
  const User = this
@@ -93,6 +104,26 @@ schema.statics.findByCredentials = function (creds) {
    return Promise.reject('Incorrect password.')
  }).catch(err => Promise.reject(err));
 };
+
+
+// ----- VIRTUALS -----
+schema.virtual('tokenCount').get(function () {
+  return this.tokens.length
+});
+
+// OLD VERSION
+// schema.virtual('models').get(async function () {
+//   return await mongoose.model('Model').find({userId: this._id});
+// });
+
+schema.virtual('models', {
+  ref: 'Model',
+  localField: '_id',
+  foreignField: 'userId'
+});
+//TODO  .populate('models').execPopulate() ile çağırılıyor docs incele.
+
+
 
 const User = mongoose.model('User', schema);
 const Roles = {

@@ -1,8 +1,9 @@
 require('../configs');
+require('../db');
 var repl = require('repl');
 
-var {User, Roles} = require('../app/components/users/model');
-var {Model} = require('../app/components/models/model');
+var {User, Roles} = require('../src/components/users/model');
+var {Model} = require('../src/components/models/model');
 
 var envName = process.env.NODE_ENV || "dev";
 var replServer = repl.start({

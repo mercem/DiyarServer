@@ -13,7 +13,7 @@ app.use('/users', users);
 app.use('/models', models);
 app.use('/categories', categories);
 
-//catches all other routes
+//Catches all other routes
 app.all('*', (req, res) => {
   res.status(404).send({message: 'NOT FOUND'})
 })

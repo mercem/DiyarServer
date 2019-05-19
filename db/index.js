@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/diyardb', { useNewUrlParser: true });
-
-module.exports = {mongoose};
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+});
+mongoose.connection
+  .once('open', () => console.log('Mongoose Connected Succesfully.'))
+  .on('error', (error) => console.warn('Error:', error))

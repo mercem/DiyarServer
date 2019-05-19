@@ -1,5 +1,4 @@
 const crypto = require('crypto');	
-const {User, Roles} = require('./model');
 const HMAC_KEY = process.env.HMAC_KEY;
 
 module.exports.getHmac = (message) => {

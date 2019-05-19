@@ -4,11 +4,15 @@
   "private": true,
   "scripts": {
     "start": "node ./server",
-    "dev": "nodemon ./server",
+    "dev": "export NODE_ENV=dev && nodemon server.js",
+    "test": "export NODE_ENV=test && jest --watch --runInBand",
     "console": "node ./console"
   },
   "endinges": {
     "node": "11.6.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -19,5 +23,11 @@
     "mongoose": "^5.4.5",
     "morgan": "~1.9.0",
     "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "chalk": "^2.4.2",
+    "dotenv": "^8.0.0",
+    "jest": "^24.7.1",
+    "supertest": "^4.0.2"
   }
 }

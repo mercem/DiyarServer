@@ -1,4 +1,4 @@
-const {mongoose} = require('../../../db');
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   name: {
@@ -33,10 +33,12 @@ const schema = new mongoose.Schema({
     type: String,
   },
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.SchemaTypes.ObjectId,
     ref: 'User',
     required: true
   }
+}, {
+  timestamps: true
 })
 
 const Model = mongoose.model('Model', schema)
