@@ -38,16 +38,27 @@ const schema = new mongoose.Schema({
       required: true
     }
   }],
+  contacts: {
+    instagram: {
+      type: String,
+    },
+    yemeksepeti: {
+      type: String,
+    },
+    facebook: {
+      type: String,
+    }
+  },
   role: {
     type: Number,
     default: 2, // regular user
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  toObject: { virtuals: true} // necessary for virtual population. In toJson Function it calls this.
 }); 
 
 // ----- METHODS -----
-
 schema.methods.generateAuthToken = function () {
   let user = this;
   const access = 'auth';
@@ -59,12 +70,11 @@ schema.methods.generateAuthToken = function () {
 schema.methods.toJSON = function () {
   let user = this;
   let userObject = user.toObject();
-  return _.pick(userObject, ['_id', 'email', 'name']);
+  return _.pick(userObject, ['_id', 'email', 'name', 'contacts','models']);
 }
 
 
 // ----- STATICS -----
-
 schema.statics.findByToken = function(token) {
   const User = this;
   let decoded;
@@ -120,10 +130,7 @@ schema.virtual('models', {
   ref: 'Model',
   localField: '_id',
   foreignField: 'userId'
-});
-//TODO  .populate('models').execPopulate() ile çağırılıyor docs incele.
-
-
+}); // meWithModels functions uses this.
 
 const User = mongoose.model('User', schema);
 const Roles = {

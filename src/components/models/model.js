@@ -28,6 +28,9 @@ const schema = new mongoose.Schema({
     },
     required: [true, 'Ios and/or Android Links are required.']
   },
+  info: {
+    type: String
+  },
   imageUrl: {
     required: true,
     type: String,
@@ -38,8 +41,21 @@ const schema = new mongoose.Schema({
     required: true
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: {virtuals: true}
 })
+
+//TODO: userId => user şeklinde deiştirilicek hem burda hem unity
+
+// ----- MIDDLEWARES -----
+const autoPopulateOwner = function(next) {
+  this.populate('userId');
+  next();
+};
+
+schema
+  .pre('find', autoPopulateOwner)
+  .pre('findOne', autoPopulateOwner)
 
 const Model = mongoose.model('Model', schema)
 

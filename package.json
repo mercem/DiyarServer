@@ -6,7 +6,7 @@
     "start": "node ./server",
     "dev": "export NODE_ENV=dev && nodemon server.js",
     "test": "export NODE_ENV=test && jest --watch --runInBand",
-    "console": "node ./console"
+    "console": "export NODE_ENV=dev && node ./console"
   },
   "endinges": {
     "node": "11.6.0"

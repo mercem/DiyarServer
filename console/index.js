@@ -1,4 +1,4 @@
-require('../configs');
+require('../config');
 require('../db');
 var repl = require('repl');
 
