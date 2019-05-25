@@ -35,7 +35,7 @@ const schema = new mongoose.Schema({
     required: true,
     type: String,
   },
-  userId: {
+  user: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'User',
     required: true
@@ -49,7 +49,7 @@ const schema = new mongoose.Schema({
 
 // ----- MIDDLEWARES -----
 const autoPopulateOwner = function(next) {
-  this.populate('userId');
+  this.populate('user');
   next();
 };
 

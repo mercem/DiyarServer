@@ -3,7 +3,7 @@ const _ = require('lodash');
 
 module.exports.create = (req, res) => {
   const model = new Model({
-    userId: req.user._id,
+    user: req.user._id,
     name: req.body.name,
     category: req.body.category,
     prefabLinks: req.body.prefabLinks,
@@ -29,14 +29,14 @@ module.exports.findById = (req, res) => {
 }
 
 module.exports.deleteById = (req, res) => {
-  Model.remove({_id: req.params.id, userId: req.user._id})
+  Model.remove({_id: req.params.id, user: req.user._id})
   .then(() => res.send('Succesful'))
   .catch(err => res.send(err));
 }
 
 module.exports.mine = (req, res) => {
   const user = req.user;
-  Model.find({userId: user._id})
+  Model.find({user: user._id})
   .then(models => res.send(models))
   .catch(err => res.status(400).send(err))
 };
