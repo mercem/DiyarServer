@@ -100,7 +100,7 @@ schema.pre('save', function(next){
 });
 
 schema.pre('remove', async function() {
-  await mongoose.model('Model').remove({userId: this._id})
+  await mongoose.model('Model').remove({user: this._id})
 })
 
 schema.statics.findByCredentials = function (creds) {
@@ -121,15 +121,10 @@ schema.virtual('tokenCount').get(function () {
   return this.tokens.length
 });
 
-// OLD VERSION
-// schema.virtual('models').get(async function () {
-//   return await mongoose.model('Model').find({userId: this._id});
-// });
-
 schema.virtual('models', {
   ref: 'Model',
   localField: '_id',
-  foreignField: 'userId'
+  foreignField: 'user'
 }); // meWithModels functions uses this.
 
 const User = mongoose.model('User', schema);

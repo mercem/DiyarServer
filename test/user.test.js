@@ -62,7 +62,7 @@ describe('User Delete', () => {
         android: 'testAndroidLink'
       },
       imageUrl: 'testImageUrl',
-      userId: testUser 
+      user: testUser 
     })
     await Promise.all([testUser.save(), testModel.save()])
   });
@@ -148,7 +148,7 @@ describe('User Virtual types', () => {
         android: 'testAndroidLink'
       },
       imageUrl: 'testImageUrl',
-      userId: testUser 
+      user: testUser 
     })
     await Promise.all([testUser.save(), testModel.save()])
   });
@@ -181,7 +181,7 @@ describe('User Association', () => {
         android: 'testAndroidLink'
       },
       imageUrl: 'testImageUrl',
-      userId: testUser 
+      user: testUser 
     })
     await Promise.all([testUser.save(), testModel.save()])
   })

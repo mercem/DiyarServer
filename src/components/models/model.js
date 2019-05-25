@@ -45,8 +45,6 @@ const schema = new mongoose.Schema({
   toJSON: {virtuals: true}
 })
 
-//TODO: userId => user şeklinde deiştirilicek hem burda hem unity
-
 // ----- MIDDLEWARES -----
 const autoPopulateOwner = function(next) {
   this.populate('user');
