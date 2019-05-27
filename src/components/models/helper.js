@@ -26,7 +26,7 @@ const categories = [
         imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/electronic.png'
       },
       {
-        name: 'sports',
+        name: 'sport',
         imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/sport.png'
       },
       {
