@@ -1,4 +1,5 @@
 const {Model} = require('./model');
+const {categories} = require('./helper');
 const _ = require('lodash');
 
 module.exports.create = (req, res) => {
@@ -6,14 +7,15 @@ module.exports.create = (req, res) => {
     user: req.user._id,
     name: req.body.name,
     category: req.body.category,
+    subCategory: req.body.subCategory,
     prefabLinks: req.body.prefabLinks,
     imageUrl: req.body.imageUrl,
     height: req.body.height,
     info: req.body.info
   });
   model.save()
-  .then(model => res.send(model))
-  .catch(err => res.status(400).send(err))
+    .then(model => res.send(model))
+    .catch(err => res.status(400).send(err))
 }
 
 module.exports.all = (req, res) => {
@@ -45,6 +47,7 @@ module.exports.update = (req, res) => {
   Model.findById(req.body._id).then(model => {
     if(req.body.name) model.name = req.body.name;
     if(req.body.category) model.category = req.body.category;
+    if(req.body.subCategory) model.subCategory = req.body.subCategory;
     if(req.body.prefabLinks){
       if(req.body.prefabLinks.ios) model.prefabLinks.ios = req.body.prefabLinks.ios;
       if(req.body.prefabLinks.android) model.prefabLinks.android = req.body.prefabLinks.android;
@@ -56,3 +59,9 @@ module.exports.update = (req, res) => {
     model.save().then(model => res.send(model)).catch(err => res.status(404).send(err))
   }).catch(err => res.status(404).send(err))
 };
+
+module.exports.categories = (req, res) => {
+  if(req.query.category)
+    res.send(categories.filter(cat => cat.name == req.query.category)[0]);
+  else res.send(categories);
+}
