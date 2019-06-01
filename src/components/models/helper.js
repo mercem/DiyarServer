@@ -26,12 +26,20 @@ const categories = [
         imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/electronic.png'
       },
       {
-        name: 'sport',
-        imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/sport.png'
+        name: 'shoe',
+        imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/shoe.png'
       },
       {
         name: 'fashion',
         imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/fashion.png'
+      },
+      {
+        name: 'food',
+        imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/food.png'
+      },
+      {
+        name: 'decor',
+        imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/decor.png'
       },
       {
         name: 'other',

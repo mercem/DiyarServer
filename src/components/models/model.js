@@ -13,6 +13,7 @@ const schema = new mongoose.Schema({
   subCategory: {
     type: String,
     required:true,
+    default: 'other'
   },
   city: {
     type: String,
