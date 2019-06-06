@@ -1,9 +1,12 @@
-require('./config');
-require('./db');
 const express = require('express');
 const path = require('path');
 
 const app = express();
+const {config} = require('./config');
+
+config(app);
+require('./db');
+
 const routes = require('./src/routes');
 
 app.use(express.json());

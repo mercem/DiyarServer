@@ -104,11 +104,13 @@ schema.pre('remove', async function() {
 })
 
 schema.statics.findByCredentials = function (creds) {
- const User = this
+ const User = this;
  return User.findOne({email: creds.email}).then(async function(user){
    if(!user) return Promise.reject('User not found.');
    if(verifyPassword(creds.password, user.password)){
     let token = await user.generateAuthToken();
+    // console.warn(token);
+    // console.warn({user, token});
     return Promise.resolve({user, token})
    };
    return Promise.reject('Incorrect password.')
