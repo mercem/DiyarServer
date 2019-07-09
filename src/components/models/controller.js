@@ -65,3 +65,4 @@ module.exports.categories = (req, res) => {
     res.send(categories.filter(cat => cat.name == req.query.category)[0]);
   else res.send(categories);
 }
+
