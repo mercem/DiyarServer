@@ -25,10 +25,10 @@ const categories = [
         name: 'electronic',
         imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/electronic.png'
       },
-      // {
-      //   name: 'shoe',
-      //   imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/shoe.png'
-      // },
+      {
+        name: 'shoe',
+        imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/shoe.png'
+      },
       {
         name: 'fashion',
         imageURL: 'https://s3.eu-west-3.amazonaws.com/diyar-mobile-food-icons/subcategories/fashion.png'
